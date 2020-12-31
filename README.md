@@ -1,2 +1,2 @@
-# swiftcodingchallanges
-Swift Coding Challanges
+# swiftcodingchallenges
+Swift Coding Challenges
