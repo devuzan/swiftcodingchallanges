@@ -125,3 +125,48 @@ func challenge3Solution2() {
   assert(containsTheSameCharacter2(string1: "ali", string2: "alii") == false, "Challange 2 failed")
 }
 challenge3Solution2()
+/*
+Challenge 4: Does one string contain another?
+-------------------------------------
+*/
+/*
+Solution 1
+*/
+extension String {
+  func doesContain(string: String) -> Bool {
+    let wordList = self.components(separatedBy: ", ").map { $0.uppercased() }
+    var currentIndex = 0
+    while currentIndex < wordList.count {
+      let word = wordList[currentIndex]
+      if word == string.uppercased() {
+        return true
+      }else {
+        currentIndex += 1
+      }
+    }
+    return false
+  }
+}
+/*
+Solution 2
+*/
+extension String {
+  func doesContain1(string: String) -> Bool {
+    range(of: string, options: .caseInsensitive) != nil
+  }
+}
+func challenge4Solution1() {
+  assert("Hello, world".doesContain(string: "Hello"), "Challange 4 failed")
+  assert("Hello, world".doesContain(string: "world"), "Challange 4 failed")
+  assert("Hello, world".doesContain(string: "Hi")  == false, "Challange 4 failed")
+  assert("Hello, world".doesContain(string: "How") == false, "Challange 4 failed")
+}
+func challenge4Solution2() {
+  assert("Hello, world".doesContain1(string: "Hello"), "Challange 4 failed")
+  assert("Hello, world".doesContain1(string: "world"), "Challange 4 failed")
+  assert("Hello, world".doesContain1(string: "Hi")  == false, "Challange 4 failed")
+  assert("Hello, world".doesContain1(string: "How") == false, "Challange 4 failed")
+}
+challenge4Solution1()
+challenge4Solution2()
+
