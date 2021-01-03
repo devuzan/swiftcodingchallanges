@@ -111,19 +111,23 @@ Solution 2
 func containsTheSameCharacter2(string1: String, string2: String) -> Bool {
   Array(string1).sorted() == Array(string2).sorted()
 }
+/*
+Challenge 3: Test
+-------------------------------------
+*/
 func challenge3Solution1() {
   assert(containsTheSameCharacter(string1: "ABC", string2: "CBA"), "Challange 2 failed")
   assert(containsTheSameCharacter(string1: "a1 b2 c3", string2: "c3 2b 1a"), "Challange 2 failed")
   assert(containsTheSameCharacter(string1: "merhaba", string2: "selam") == false, "Challange 2 failed")
   assert(containsTheSameCharacter(string1: "ali", string2: "alii") == false, "Challange 2 failed")
 }
-challenge3Solution1()
 func challenge3Solution2() {
   assert(containsTheSameCharacter2(string1: "ABC", string2: "CBA"), "Challange 2 failed")
   assert(containsTheSameCharacter2(string1: "a1 b2 c3", string2: "c3 2b 1a"), "Challange 2 failed")
   assert(containsTheSameCharacter2(string1: "merhaba", string2: "selam") == false, "Challange 2 failed")
   assert(containsTheSameCharacter2(string1: "ali", string2: "alii") == false, "Challange 2 failed")
 }
+challenge3Solution1()
 challenge3Solution2()
 /*
 Challenge 4: Does one string contain another?
@@ -155,6 +159,10 @@ extension String {
     range(of: string, options: .caseInsensitive) != nil
   }
 }
+/*
+Challenge 4: Test
+-------------------------------------
+*/
 func challenge4Solution1() {
   assert("Hello, world".doesContain(string: "Hello"), "Challange 4 failed")
   assert("Hello, world".doesContain(string: "world"), "Challange 4 failed")
@@ -170,3 +178,147 @@ func challenge4Solution2() {
 challenge4Solution1()
 challenge4Solution2()
 
+
+/*
+Challenge 5: Count the characters
+-------------------------------------
+*/
+/*
+Solution 1
+*/
+func countTheCharacters1(string: String, char: Character) -> Int {
+  let letters = string.filter { $0 == char }
+  print("The letter \(char) appears \(letters.count) times in \(string)")
+  return letters.count
+}
+/*
+Solution 2
+*/
+func countTheCharacters2(string: String, char: Character) -> Int {
+  var count = 0
+  for c in Array(string) {
+    if char == c {
+      count += 1
+    }
+  }
+  print("The letter \(char) appears \(count) times in \(string)")
+  return count
+}
+/*
+Solution 3
+*/
+func countTheCharacters3(string: String, char: Character) -> Int {
+  let count = string.reduce(0) {
+    $1 == char ? $0 + 1 : $0
+  }
+  print("The letter \(char) appears \(count) times in \(string)")
+  return count
+}
+/*
+Solution 4
+*/
+func countTheCharacters4(string: String, char: Character) -> Int {
+  let count = NSCountedSet(array: Array(string)).count(for: char)
+  print("The letter \(char) appears \(count) times in \(string)")
+  return count
+}
+/*
+Solution 5
+*/
+func countTheCharacters5(string: String, char: Character) -> Int {
+  let modified = string.replacingOccurrences(of: "\(char)", with: "")
+  let count = string.count - modified.count
+  print("The letter \(char) appears \(count) times in \(string)")
+  return count
+}
+/*
+Challenge 5: Test
+-------------------------------------
+*/
+func challenge5Solution1() {
+  assert(countTheCharacters1(string: "The rain in Spain", char: "a") == 2, "Challange 5 Failed")
+  assert(countTheCharacters1(string: "Hacking with Swift", char: "i") == 3, "Challange 5 Failed")
+  assert(countTheCharacters1(string: "Mississippi", char: "s") == 4, "Challange 5 Failed")
+}
+func challenge5Solution2() {
+  assert(countTheCharacters2(string: "The rain in Spain", char: "a") == 2, "Challange 5 Failed")
+  assert(countTheCharacters2(string: "Hacking with Swift", char: "i") == 3, "Challange 5 Failed")
+  assert(countTheCharacters2(string: "Mississippi", char: "s") == 4, "Challange 5 Failed")
+}
+func challenge5Solution3() {
+  assert(countTheCharacters3(string: "The rain in Spain", char: "a") == 2, "Challange 5 Failed")
+  assert(countTheCharacters3(string: "Hacking with Swift", char: "i") == 3, "Challange 5 Failed")
+  assert(countTheCharacters3(string: "Mississippi", char: "s") == 4, "Challange 5 Failed")
+}
+func challenge5Solution4() {
+  assert(countTheCharacters4(string: "The rain in Spain", char: "a") == 2, "Challange 5 Failed")
+  assert(countTheCharacters4(string: "Hacking with Swift", char: "i") == 3, "Challange 5 Failed")
+  assert(countTheCharacters4(string: "Mississippi", char: "s") == 4, "Challange 5 Failed")
+}
+func challenge5Solution5() {
+  assert(countTheCharacters5(string: "The rain in Spain", char: "a") == 2, "Challange 5 Failed")
+  assert(countTheCharacters5(string: "Hacking with Swift", char: "i") == 3, "Challange 5 Failed")
+  assert(countTheCharacters5(string: "Mississippi", char: "s") == 4, "Challange 5 Failed")
+}
+challenge5Solution1()
+challenge5Solution2()
+challenge5Solution3()
+challenge5Solution4()
+challenge5Solution5()
+
+/*
+ Challenge 6: Remove duplicate letters from a string
+ */
+/*
+Solution 1
+*/
+func removedDuplicateLetters1(string: String) -> String {
+  var newString = ""
+  for char in string {
+    if !newString.contains(char) {
+      newString.append(char)
+    }
+  }
+  return newString
+}
+/*
+Solution 2
+*/
+func removedDuplicateLetters2(string: String) -> String {
+  let array = string.map { String($0) }
+  let ordered = NSOrderedSet(array: array)
+  let letters = Array(ordered) as! Array<String>
+  return letters.joined()
+}
+/*
+Solution 3
+*/
+func removedDuplicateLetters3(string: String) -> String {
+  var values = [Character: Bool]()
+  let result = string.filter {
+    values.updateValue(true, forKey: $0) == nil
+  }
+  return String(result)
+}
+/*
+Challenge 6: Test
+-------------------------------------
+*/
+func challenge6Solution1() {
+  assert(removedDuplicateLetters1(string: "yusuf") == "yusf", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "mississipi") == "misp", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "hackingwithswift") == "hackingwtsf", "Challange 6 Failed")
+}
+func challenge6Solution2() {
+  assert(removedDuplicateLetters1(string: "yusuf") == "yusf", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "mississipi") == "misp", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "hackingwithswift") == "hackingwtsf", "Challange 6 Failed")
+}
+func challenge6Solution3() {
+  assert(removedDuplicateLetters1(string: "yusuf") == "yusf", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "mississipi") == "misp", "Challange 6 Failed")
+  assert(removedDuplicateLetters1(string: "hackingwithswift") == "hackingwtsf", "Challange 6 Failed")
+}
+challenge6Solution1()
+challenge6Solution2()
+challenge6Solution3()
