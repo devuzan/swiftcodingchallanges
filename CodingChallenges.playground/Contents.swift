@@ -371,3 +371,25 @@ func challenge7Solution2() {
 challenge7Solution1()
 challenge7Solution2()
 
+
+/*
+ Challenge 8: String is Rotated
+ */
+/*
+Solution 1
+*/
+func stringIsRotated(string: String, rotated: String) -> Bool {
+  guard string.count == rotated.count else { return false }
+  let combinedRotated = rotated + rotated
+  return combinedRotated.contains(string)
+}
+/*
+Challenge 8: Test
+*/
+func challenge8Solution1() {
+  assert(stringIsRotated(string: "abcdef", rotated: "defabc") == true, "Challange 8 Failed")
+  assert(stringIsRotated(string: "abcd", rotated: "dabc") == true , "Challange 8 Failed")
+  assert(stringIsRotated(string: "swift", rotated: "ftsiw") == false , "Challange 8 Failed")
+}
+challenge8Solution1()
+
