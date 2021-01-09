@@ -393,3 +393,39 @@ func challenge8Solution1() {
 }
 challenge8Solution1()
 
+
+/*
+ Challenge 9: Find Pangram
+ */
+/*
+Solution 1
+*/
+func findPangram1(string: String) -> Bool {
+  let inputCharacters = Array(string.lowercased().replacingOccurrences(of: " ", with: "")).map { String($0) }
+  let letterCharacters =  "abcdefghijklmnopqrstuvwxyz".map { String($0) } //CharacterSet.letters
+  for char in letterCharacters {
+    if !inputCharacters.contains(char) {
+      return false
+    }
+  }
+  return true
+}
+func findPangram2(string: String) -> Bool {
+  let letterSet = Set(string.lowercased())
+  let filtered = letterSet.compactMap { $0 >= "a" && $0 <= "z" }
+  return filtered.count == 26
+}
+/*
+Challenge 9: Test
+*/
+func challenge9Solution1() {
+  assert(findPangram1(string: "The quick brown fox jumps over the lazy dog") == true, "Challange 9 Failed")
+  assert(findPangram1(string: "The quick brown fox jumped over the lazy dog") == false , "Challange 9 Failed")
+}
+func challenge9Solution2() {
+  assert(findPangram2(string: "The quick brown fox jumps over the lazy dog") == true, "Challange 9 Failed")
+  assert(findPangram2(string: "The quick brown fox jumped over the lazy dog") == false , "Challange 9 Failed")
+}
+challenge9Solution1()
+challenge9Solution1()
+
