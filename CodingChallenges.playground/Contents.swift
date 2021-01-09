@@ -11,6 +11,7 @@ import Cocoa
 /*
 Solution 1
 */
+/*
 func areTheLettersUnique(string: String) -> Bool {
   var usedLetters = [Character]()
   for character in string {
@@ -266,6 +267,7 @@ challenge5Solution3()
 challenge5Solution4()
 challenge5Solution5()
 
+
 /*
  Challenge 6: Remove duplicate letters from a string
  */
@@ -322,3 +324,50 @@ func challenge6Solution3() {
 challenge6Solution1()
 challenge6Solution2()
 challenge6Solution3()
+*/
+
+/*
+ Challenge 7: Condense whitespace
+ */
+/*
+Solution 1
+*/
+func condenseWhiteSpace1(string: String) -> String {
+  let result = string.components(separatedBy: .whitespacesAndNewlines)
+  return result.filter { !$0.isEmpty}.joined(separator: " ")
+}
+/*
+Solution 2
+*/
+func condenseWhiteSpace2(string: String) -> String {
+  var newString = ""
+  var seenSpace = false
+  for char in string {
+    if char == " " {
+      if seenSpace {
+        continue
+      }
+      seenSpace = true
+    } else {
+      seenSpace = false
+    }
+    newString.append(char)
+  }
+  return newString
+}
+/*
+Challenge 7: Test
+*/
+func challenge7Solution1() {
+  assert(condenseWhiteSpace1(string: "a   b   c    ") == "a b c", "Challange 7 Failed")
+  assert(condenseWhiteSpace1(string: "abc") == "abc", "Challange 7 Failed")
+  assert(condenseWhiteSpace1(string: "a   bc") == "a bc", "Challange 7 Failed")
+}
+func challenge7Solution2() {
+  assert(condenseWhiteSpace2(string: "a   b   c    ") == "a b c ", "Challange 7 Failed")
+  assert(condenseWhiteSpace2(string: "abc") == "abc", "Challange 7 Failed")
+  assert(condenseWhiteSpace2(string: "a   bc") == "a bc", "Challange 7 Failed")
+}
+challenge7Solution1()
+challenge7Solution2()
+
