@@ -429,3 +429,29 @@ func challenge9Solution2() {
 challenge9Solution1()
 challenge9Solution1()
 
+
+/*
+ Challenge 10: Vovel and Consonants
+ */
+/*
+Solution 1
+*/
+
+func seperateVowelAndConsonants(string: String) -> (Int, Int) {
+  let vowels = ["a", "e", "i", "o"]
+  var totalVowel = 0
+  let clearedString = Array(string).map { String($0)}.filter { $0 != " " }
+  for eachCharacter in clearedString {
+    if vowels.contains(eachCharacter) {
+      totalVowel += 1
+    }
+  }
+  return (totalVowel, clearedString.count - totalVowel)
+}
+/*
+Challenge 10: Test
+*/
+func challenge10Solution1() {
+  assert(seperateVowelAndConsonants(string: "Swift Coding Challenges") == (6, 15), "Challange 10 Failed")
+  assert(seperateVowelAndConsonants(string: "Mississippi") == (4, 7) , "Challange 10 Failed")
+}
